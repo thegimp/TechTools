@@ -1,0 +1,19 @@
+<ResourceDictionary 
+    x:Class="TechTools.TrayIcon"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tb="http://www.hardcodet.net/taskbar" >
+
+  <!-- Globally declared notify icon -->
+    <tb:TaskbarIcon x:Key="MyNotifyIcon" ToolTipText="Tech tools" >
+        <!-- Set a simple context menu  -->
+        <tb:TaskbarIcon.ContextMenu>
+            <ContextMenu Background="LightCoral">
+                <MenuItem Header="First Menu Item" Click="MenuItem_OneClick"/>
+                <MenuItem Header="Second Menu Item" Click="MenuItem_TwoClick"/>
+                <MenuItem Header="Close" Click="MenuItem_CloseClick"/>
+            </ContextMenu>
+        </tb:TaskbarIcon.ContextMenu>
+    </tb:TaskbarIcon>
+
+</ResourceDictionary>
