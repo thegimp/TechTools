@@ -9,8 +9,9 @@
         <!-- Set a simple context menu  -->
         <tb:TaskbarIcon.ContextMenu>
             <ContextMenu Background="LightCoral">
-                <MenuItem Header="First Menu Item" Click="MenuItem_OneClick"/>
-                <MenuItem Header="Second Menu Item" Click="MenuItem_TwoClick"/>
+                <MenuItem Header="Merge Reg Files" SubmenuOpened="ContextSubMenu_FilesOpened">
+                    <MenuItem Header="Temp"/>                    
+                </MenuItem>
                 <MenuItem Header="Close" Click="MenuItem_CloseClick"/>
             </ContextMenu>
         </tb:TaskbarIcon.ContextMenu>

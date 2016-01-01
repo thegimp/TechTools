@@ -3,6 +3,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Hardcodet.Wpf.TaskbarNotification;
+using System.IO;
+using System.Windows.Controls;
 
 // http://www.codeproject.com/Articles/36468/WPF-NotifyIcon
 // https://www.iconfinder.com/iconsets/technology-and-hardware-2
@@ -23,18 +25,29 @@ namespace TechTools
             App.Current.Shutdown();    
         }
 
-        private void MenuItem_OneClick(object sender, System.Windows.RoutedEventArgs e)
+        private void MenuItem_FilesClick(object sender, System.Windows.RoutedEventArgs e)
         {
             GetTrayIconResource();
-            tb.ShowBalloonTip("One", "You picked one", BalloonIcon.Info);
+            var filename = (sender as MenuItem).Header;
+            System.Diagnostics.Process.Start(filename.ToString());
         }
 
-        private void MenuItem_TwoClick(object sender, System.Windows.RoutedEventArgs e)
+        private void ContextSubMenu_FilesOpened(object sender, System.Windows.RoutedEventArgs e)
         {
             GetTrayIconResource();
-            tb.ShowBalloonTip("Two", "You picked two", BalloonIcon.Info);
-        }
+            MenuItem parent = sender as MenuItem;
+            parent.Items.Clear();
 
+            string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.REG");
+            foreach (string file in files)
+            {
+                MenuItem item = new MenuItem();
+                item.Header = System.IO.Path.GetFileName(file);
+                //item.Icon = TechTools.Properties.Resources.TrayIcon;
+                item.Click += MenuItem_FilesClick;
+                parent.Items.Add(item);
+            }
+        }
 
     }
 
